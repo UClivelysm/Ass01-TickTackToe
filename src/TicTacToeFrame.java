@@ -80,14 +80,62 @@ public class TicTacToeFrame extends JFrame {
     }
 
     public boolean isTie() {
+        boolean xFlag = false;
+        boolean oFlag = false;
+
         for (int row = 0; row < 3; row++) {
+            xFlag = oFlag = false;
             for (int col = 0; col < 3; col++) {
-                if (board[row][col].getText().equals(" ")) {
-                    return false; // Empty space found, not a tie
+                if (board[row][col].getText().equals("X")) {
+                    xFlag = true;
+                }
+                if (board[row][col].getText().equals("O")) {
+                    oFlag = true;
                 }
             }
+            if (!(xFlag && oFlag)) {
+                return false;
+            }
         }
-        return !isWin("X") && !isWin("O");
+
+        for (int col = 0; col < 3; col++) {
+            xFlag = oFlag = false;
+            for (int row = 0; row < 3; row++) {
+                if (board[row][col].getText().equals("X")) {
+                    xFlag = true;
+                }
+                if (board[row][col].getText().equals("O")) {
+                    oFlag = true;
+                }
+            }
+            if (!(xFlag && oFlag)) {
+                return false;
+            }
+        }
+
+        xFlag = oFlag = false;
+        if (board[0][0].getText().equals("X") || board[1][1].getText().equals("X") || board[2][2].getText().equals("X")) {
+            xFlag = true;
+        }
+        if (board[0][0].getText().equals("O") || board[1][1].getText().equals("O") || board[2][2].getText().equals("O")) {
+            oFlag = true;
+        }
+        if (!(xFlag && oFlag)) {
+            return false;
+        }
+
+        xFlag = oFlag = false;
+        if (board[0][2].getText().equals("X") || board[1][1].getText().equals("X") || board[2][0].getText().equals("X")) {
+            xFlag = true;
+        }
+        if (board[0][2].getText().equals("O") || board[1][1].getText().equals("O") || board[2][0].getText().equals("O")) {
+            oFlag = true;
+        }
+        if (!(xFlag && oFlag)) {
+            return false;
+        }
+
+        return true;
     }
     public void resetBoard() {
         for (int row = 0; row < 3; row++) {
